@@ -14,14 +14,15 @@ const JobCard = ({ job, refreshBookmarks }) => {
 
     useEffect(() => {
         checkIfBookmarked();
-    }, []);
+    }, [bookmarked]);
 
     const checkIfBookmarked = async () => {
         try {
             const storedBookmarks = await AsyncStorage.getItem(STORAGE_KEY);
             const bookmarks = storedBookmarks ? JSON.parse(storedBookmarks) : [];
             setBookmarked(bookmarks.some((item) => item.id === job.id));
-        } catch (error) {
+        } 
+        catch (error) {
             console.error("Failed to load bookmarks", error);
         }
     };
